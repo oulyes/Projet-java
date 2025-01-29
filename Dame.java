@@ -16,4 +16,8 @@ public class Dame extends Piece {
         return diffX == diffY;
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 33ea72ed644392ae77a03b6a338f7ca61c20b29d
