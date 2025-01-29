@@ -16,25 +16,21 @@ public class InterfaceGraphique extends JFrame {
         initialiserInterface();
     }
 
-    // Initialisation de l'interface graphique
     private void initialiserInterface() {
         setTitle("Jeu de Dames");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 800);
         setLayout(new BorderLayout());
 
-        // Informations
         JPanel infoPanel = new JPanel();
         statutLabel = new JLabel("Tour du Joueur 1 (Blancs)");
         infoPanel.add(statutLabel);
         add(infoPanel, BorderLayout.NORTH);
 
-        // Plateau de jeu
         plateauPanel = new JPanel(new GridLayout(10, 10));
         rafraichirPlateau();
         add(plateauPanel, BorderLayout.CENTER);
 
-        // Boutons
         JPanel boutonPanel = new JPanel();
         JButton btnQuitter = new JButton("Quitter");
 
@@ -46,12 +42,10 @@ public class InterfaceGraphique extends JFrame {
         setVisible(true);
     }
 
-    // Mise ? jour du statut
     public void mettreAJourStatut(String message) {
         statutLabel.setText(message);
     }
 
-    // Rafra�chir le plateau
     private void rafraichirPlateau() {
         plateauPanel.removeAll();
         Plateau plateau = jeu.getPlateau();
@@ -67,7 +61,6 @@ public class InterfaceGraphique extends JFrame {
         plateauPanel.repaint();
     }
 
-    // Cr�ation de chaque case
     private JPanel creerPanelCase(Case case_) {
         JPanel panel = new JPanel();
         panel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -106,10 +99,12 @@ public class InterfaceGraphique extends JFrame {
                 rafraichirPlateau();
             }
         } else {
-            if (jeu.getPlateau().deplacerPiece(caseSelectionnee, caseCliquee)) {
-                jeu.changerJoueur();
-            } else {
-                JOptionPane.showMessageDialog(this, "Mouvement invalide !");
+            if (!Case.equals(caseSelectionnee, caseCliquee)) {
+                if (jeu.getPlateau().deplacerPiece(caseSelectionnee, caseCliquee)) {
+                    jeu.changerJoueur();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Coup invalide !");
+                }
             }
             caseSelectionnee = null;
             rafraichirPlateau();
