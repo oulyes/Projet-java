@@ -38,7 +38,6 @@ public class InterfaceGraphique extends JFrame {
 		btnQuitter.addActionListener(e -> System.exit(0));
 		btnRecommencer.addActionListener(e -> {
 			jeu.recommencer();
-			rafraichirPlateau();
 		});
 
 		boutonPanel.add(btnQuitter);
@@ -52,7 +51,7 @@ public class InterfaceGraphique extends JFrame {
 		statutLabel.setText(message);
 	}
 
-	private void rafraichirPlateau() {
+	public void rafraichirPlateau() {
 		plateauPanel.removeAll();
 		Plateau plateau = jeu.getPlateau();
 
@@ -95,7 +94,7 @@ public class InterfaceGraphique extends JFrame {
 
 	private void gererClicCase(Case caseCliquee) {
 		if (jeu.estPartieTerminee()) {
-			JOptionPane.showMessageDialog(this, "La partie est terminée !");
+			JOptionPane.showMessageDialog(this, "La partie est terminee");
 			return;
 		}
 

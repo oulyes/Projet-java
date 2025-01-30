@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Plateau {
 	public final Case[][] cases;
@@ -44,32 +42,30 @@ public class Plateau {
 	}
 
 	private void effectuerDeplacement(Case depart, Case arrivee) {
-		if (!depart.getPiece().estDame) {
+		Piece piece = depart.getPiece();
+
+		if (piece instanceof Pion) {
 			if (Math.abs(depart.getX() - arrivee.getX()) == 2) {
 				int captureX = (depart.getX() + arrivee.getX()) / 2;
 				int captureY = (depart.getY() + arrivee.getY()) / 2;
 				cases[captureX][captureY].setPiece(null);
 			}
-		} else {
+		} else if (piece instanceof Dame) {
 			int dx = arrivee.getX() - depart.getX();
 			int dy = arrivee.getY() - depart.getY();
 
-			if (Math.abs(dx) == Math.abs(dy)) {
-				int stepX = dx / Math.abs(dx);
-				int stepY = dy / Math.abs(dy);
+			int stepX = dx / Math.abs(dx);
+			int stepY = dy / Math.abs(dy);
 
-				int x = depart.getX() + stepX;
-				int y = depart.getY() + stepY;
+			int x = depart.getX() + stepX;
+			int y = depart.getY() + stepY;
 
-				while (x != arrivee.getX() && y != arrivee.getY()) {
-					if (cases[x][y].getPiece() != null) {
-						if (cases[x][y].getPiece().getCouleur() != depart.getPiece().getCouleur()) {
-							cases[x][y].setPiece(null);
-						}
-					}
-					x += stepX;
-					y += stepY;
+			while (x != arrivee.getX() && y != arrivee.getY()) {
+				if (cases[x][y].getPiece() != null && cases[x][y].getPiece().getCouleur() != piece.getCouleur()) {
+					cases[x][y].setPiece(null);
 				}
+				x += stepX;
+				y += stepY;
 			}
 		}
 
@@ -119,17 +115,11 @@ public class Plateau {
 		int x = depart.getX() + stepX;
 		int y = depart.getY() + stepY;
 
-		int nbPionsAdverses = 0;
-
 		while (x != arrivee.getX() && y != arrivee.getY()) {
 			if (cases[x][y].getPiece() != null) {
 				if (cases[x][y].getPiece().getCouleur() == depart.getPiece().getCouleur()) {
 					return false;
 				} else {
-					nbPionsAdverses++;
-					if (nbPionsAdverses > 1) {
-						return false;
-					}
 				}
 			}
 			x += stepX;

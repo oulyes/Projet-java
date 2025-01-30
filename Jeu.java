@@ -23,7 +23,12 @@ public class Jeu {
 	}
 
 	public void recommencer() {
-		initialiserJeu();
+		plateau = new Plateau();
+		joueurCourant = joueur1;
+		partieTerminee = false;
+		
+		interfaceGraphique.mettreAJourStatut("Tour du Joueur 1 (Blancs)");
+		interfaceGraphique.rafraichirPlateau();
 	}
 
 	public void verifierGagnant() {
@@ -42,10 +47,10 @@ public class Jeu {
 		}
 
 		if (white == 0) {
-			JOptionPane.showMessageDialog(interfaceGraphique, "Joueur 2 a gagné !");
+			JOptionPane.showMessageDialog(interfaceGraphique, "Joueur 2 a gagne");
 			partieTerminee = true;
 		} else if (black == 0) {
-			JOptionPane.showMessageDialog(interfaceGraphique, "Joueur 1 a gagné !");
+			JOptionPane.showMessageDialog(interfaceGraphique, "Joueur 1 a gagne");
 			partieTerminee = true;
 		}
 	}

@@ -5,7 +5,6 @@ public class TestJeuDames {
 				new Jeu();
 			} catch (Exception e) {
 				System.err.println("Erreur lors du lancement du jeu : " + e.getMessage());
-				e.printStackTrace();
 			}
 		});
 	}

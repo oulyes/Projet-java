@@ -37,4 +37,12 @@ public class Dame extends Piece {
 
 		return casesIntermediaires;
 	}
+
+    public boolean isEstDame() {
+        return estDame;
+    }
+
+    public void setEstDame(boolean estDame) {
+        this.estDame = estDame;
+    }
 }
